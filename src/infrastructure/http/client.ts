@@ -1,5 +1,5 @@
 export async function httpGet<T>(path: string, email: string): Promise<T> {
-  const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}${path}`, {
+  const res = await fetch(`/api${path}`, {
     headers: { User: email },
   })
   if (!res.ok) throw new Error(`GET ${path} failed: ${res.status}`)
@@ -7,7 +7,7 @@ export async function httpGet<T>(path: string, email: string): Promise<T> {
 }
 
 export async function httpPost<T>(path: string, email: string, body: unknown): Promise<T> {
-  const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}${path}`, {
+  const res = await fetch(`/api${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
