@@ -1,0 +1,155 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a472a 0%, #2d5a27 50%, #4a7c3f 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+}
+
+.nav {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a472a;
+  margin: 0 0 8px;
+}
+
+.bananas {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.banana {
+  font-size: 28px;
+  transition: filter 0.3s;
+}
+
+.bananaEmpty {
+  font-size: 28px;
+  filter: grayscale(1) opacity(0.3);
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 24px 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.item:hover {
+  border-color: #f59e0b;
+}
+
+.monkeyEmoji {
+  font-size: 28px;
+}
+
+.monkeyName {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+.feedButton {
+  padding: 8px 16px;
+  background: #f59e0b;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.feedButton:hover:not(:disabled) {
+  background: #d97706;
+}
+
+.feedButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.feedButton:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.removeButton {
+  padding: 8px 12px;
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.removeButton:hover {
+  color: #dc2626;
+  border-color: #fca5a5;
+}

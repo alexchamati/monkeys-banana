@@ -9,8 +9,7 @@ import type { Monkey } from '../domain/monkey/Monkey'
 import { FeedHttpRepository } from '../infrastructure/http/FeedHttpRepository'
 import { MonkeyHttpRepository } from '../infrastructure/http/MonkeyHttpRepository'
 import { getThankYouMessage } from '../helpers/monkey'
-
-type Status = 'loading' | 'idle' | 'error'
+import styles from './Feed.module.css'
 
 export default function Feed() {
   const { email } = useAuth()
@@ -20,7 +19,7 @@ export default function Feed() {
 
   const [monkeys, setMonkeys] = useState<Monkey[]>([])
   const [bananasLeft, setBananasLeft] = useState(MAX_BANANAS)
-  const [status, setStatus] = useState<Status>('loading')
+  const [status, setStatus] = useState<'loading' | 'idle' | 'error'>('loading')
 
   useEffect(() => {
     Promise.all([getMonkeys.getAll(), feedMonkeys.getCurrentSelection()])
@@ -52,31 +51,51 @@ export default function Feed() {
   if (status === 'error') return <p>Impossible de charger les singes.</p>
 
   return (
-    <div>
-      <Link to="/dashboard">Voir le classement</Link>
-      <h1>Nourrir les singes</h1>
-      <p>
-        {bananasLeft > 0
-          ? `${bananasLeft} banane${bananasLeft > 1 ? 's' : ''} restante${bananasLeft > 1 ? 's' : ''}`
-          : 'Plus de bananes disponibles'}
-      </p>
+    <div className={styles.page}>
+      <nav className={styles.nav}>
+        <Link to="/dashboard" className={styles.navLink}>Voir le classement 🏆</Link>
+      </nav>
 
-      <ul>
-        {monkeys.map(monkey => (
-          <li key={monkey.id}>
-            <span>{monkey.name}</span>
-            <button
-              onClick={() => feedMonkey(monkey)}
-              disabled={bananasLeft === 0}
-            >
-              Donner une banane
-            </button>
-            <button onClick={() => removeFromList(monkey.id)}>
-              Retirer de la liste
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Nourrir les singes 🐒</h1>
+          <div className={styles.bananas}>
+            {Array.from({ length: MAX_BANANAS }).map((_, i) => (
+              <span key={i} className={i < bananasLeft ? styles.banana : styles.bananaEmpty}>
+                🍌
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {monkeys.length === 0 ? (
+          <p className={styles.empty}>
+            {bananasLeft === 0 ? 'Toutes tes bananes ont été distribuées !' : 'Aucun singe dans ta liste.'}
+          </p>
+        ) : (
+          <ul className={styles.list}>
+            {monkeys.map(monkey => (
+              <li key={monkey.id} className={styles.item}>
+                <span className={styles.monkeyEmoji}>🐵</span>
+                <span className={styles.monkeyName}>{monkey.name}</span>
+                <button
+                  className={styles.feedButton}
+                  onClick={() => feedMonkey(monkey)}
+                  disabled={bananasLeft === 0}
+                >
+                  Donner une banane 🍌
+                </button>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => removeFromList(monkey.id)}
+                >
+                  Retirer
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

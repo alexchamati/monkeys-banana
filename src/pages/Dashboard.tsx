@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GetDashboard } from '../application/usecases/GetDashboard'
+import { MEDALS } from '../constants/monkey'
 import { useAuth } from '../context/AuthContext'
 import type { MonkeyDetail } from '../domain/monkey/Monkey'
 import { MonkeyHttpRepository } from '../infrastructure/http/MonkeyHttpRepository'
-import { MEDALS } from '../constants/monkey'
+import styles from './Dashboard.module.css'
 
 export default function Dashboard() {
   const { email } = useAuth()
@@ -30,21 +31,49 @@ export default function Dashboard() {
   const maxBananas = monkeys[0]?.banana ?? 0
 
   return (
-    <div>
-      <Link to="/feed">Nourrir les singes</Link>
-      <h1>Classement</h1>
-      <ol>
-        {monkeys.map((monkey, index) => (
-          <li key={monkey.id}>
-            <span>{MEDALS[index] ?? `#${index + 1}`}</span>
-            <span>{monkey.name}</span>
-            <span>{monkey.banana} banane{monkey.banana !== 1 ? 's' : ''}</span>
-            {maxBananas > 0 && (
-              <progress value={monkey.banana} max={maxBananas} />
-            )}
-          </li>
-        ))}
-      </ol>
+    <div className={styles.page}>
+      <nav className={styles.nav}>
+        <Link to="/feed" className={styles.navLink}>Nourrir les singes 🐒</Link>
+      </nav>
+
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>🐒 Le trône des bananes</h1>
+        </div>
+
+        {monkeys.length === 0 ? (
+          <p className={styles.empty}>Aucun singe n'a encore été nourri.</p>
+        ) : (
+          <ol className={styles.list}>
+            {monkeys.map((monkey, index) => (
+              <li
+                key={monkey.id}
+                className={`${styles.item} ${index === 0 ? styles.itemTop : ''}`}
+              >
+                <span className={styles.medal}>
+                  {MEDALS[index] ?? `${index + 1}`}
+                </span>
+                <div className={styles.itemContent}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span className={styles.name}>{monkey.name}</span>
+                    <span className={styles.count}>
+                      {monkey.banana} 🍌
+                    </span>
+                  </div>
+                  {maxBananas > 0 && (
+                    <div className={styles.barWrapper}>
+                      <div
+                        className={styles.barFill}
+                        style={{ width: `${(monkey.banana / maxBananas) * 100}%` }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
     </div>
   )
 }
