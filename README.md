@@ -8,3 +8,4 @@ VITE_API_BASE_URL=https://test-backend.avahi.node.monkeypatch.io
 
 ### Run project
 
+pnpm run dev
