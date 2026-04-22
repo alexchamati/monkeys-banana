@@ -1,3 +1,4 @@
+import './App.css'
 import { Toaster } from 'sonner'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'

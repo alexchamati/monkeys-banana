@@ -7,6 +7,12 @@
   padding: 40px 16px;
 }
 
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 12px;
+  }
+}
+
 .nav {
   width: 100%;
   max-width: 640px;
@@ -40,6 +46,13 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+}
+
 .header {
   text-align: center;
   margin-bottom: 32px;
@@ -50,6 +63,12 @@
   font-weight: 700;
   color: #1a472a;
   margin: 0 0 8px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+  }
 }
 
 .bananas {
@@ -96,6 +115,14 @@
   transition: border-color 0.2s;
 }
 
+@media (max-width: 480px) {
+  .item {
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 8px;
+  }
+}
+
 .item:hover {
   border-color: #f59e0b;
 }
@@ -109,6 +136,15 @@
   font-size: 16px;
   font-weight: 600;
   color: #111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .monkeyName {
+    font-size: 14px;
+  }
 }
 
 .feedButton {
@@ -122,6 +158,14 @@
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
   white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .feedButton {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
 }
 
 .feedButton:hover:not(:disabled) {
@@ -147,6 +191,13 @@
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
   white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .removeButton {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
 }
 
 .removeButton:hover {

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #1a472a 0%, #2d5a27 50%, #4a7c3f 100%);
+  padding: 16px;
 }
 
 .card {
@@ -16,11 +17,24 @@
   text-align: center;
 }
 
+@media (max-width: 480px) {
+  .card {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+}
+
 .emoji {
   font-size: 72px;
   display: block;
   margin-bottom: 8px;
   animation: swing 2s ease-in-out infinite;
+}
+
+@media (max-width: 480px) {
+  .emoji {
+    font-size: 52px;
+  }
 }
 
 @keyframes swing {
@@ -33,6 +47,12 @@
   font-weight: 700;
   color: #1a472a;
   margin: 0 0 4px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+  }
 }
 
 .subtitle {
@@ -84,6 +104,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
+}
+
+@media (max-width: 480px) {
+  .button {
+    font-size: 15px;
+    padding: 12px;
+  }
 }
 
 .button:hover {
