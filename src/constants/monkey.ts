@@ -8,3 +8,5 @@ export const THANK_YOU_MESSAGES = [
   (name: string) => `${name} fait le tour de la cage en agitant les bras frénétiquement`,
   (name: string) => `${name} épluche la banane avec une élégance royale et te fait une révérence`,
 ]
+
+export const MEDALS = ['🥇', '🥈', '🥉']
