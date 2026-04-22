@@ -1,3 +1,4 @@
+import { Toaster } from 'sonner'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import Dashboard from './pages/Dashboard'
@@ -12,6 +13,7 @@ function PrivateRoute(props: { children: React.ReactNode }) {
 function App() {
   return (
     <AuthProvider>
+      <Toaster position="top-center" richColors />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'sonner'
 import { FeedMonkeys } from '../application/usecases/FeedMonkeys'
 import { GetMonkeys } from '../application/usecases/GetMonkeys'
 import { MAX_BANANAS } from '../constants/monkey'
@@ -6,6 +8,7 @@ import { useAuth } from '../context/AuthContext'
 import type { Monkey } from '../domain/monkey/Monkey'
 import { FeedHttpRepository } from '../infrastructure/http/FeedHttpRepository'
 import { MonkeyHttpRepository } from '../infrastructure/http/MonkeyHttpRepository'
+import { getThankYouMessage } from '../helpers/monkey'
 
 type Status = 'loading' | 'idle' | 'error'
 
@@ -18,7 +21,6 @@ export default function Feed() {
   const [monkeys, setMonkeys] = useState<Monkey[]>([])
   const [bananasLeft, setBananasLeft] = useState(MAX_BANANAS)
   const [status, setStatus] = useState<Status>('loading')
-  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
   useEffect(() => {
     Promise.all([getMonkeys.getAll(), feedMonkeys.getCurrentSelection()])
@@ -36,9 +38,9 @@ export default function Feed() {
       await feedMonkeys.execute([monkey.id])
       setMonkeys(prev => prev.filter(m => m.id !== monkey.id))
       setBananasLeft(prev => prev - 1)
-      setFeedback({ type: 'success', message: `${monkey.name} a été nourri !` })
+      toast.success(getThankYouMessage(monkey.name))
     } catch (e) {
-      setFeedback({ type: 'error', message: e instanceof Error ? e.message : 'Une erreur est survenue' })
+      toast.error(e instanceof Error ? e.message : 'Une erreur est survenue')
     }
   }
 
@@ -51,6 +53,7 @@ export default function Feed() {
 
   return (
     <div>
+      <Link to="/dashboard">Voir le classement</Link>
       <h1>Nourrir les singes</h1>
       <p>
         {bananasLeft > 0
@@ -74,8 +77,6 @@ export default function Feed() {
           </li>
         ))}
       </ul>
-
-      {feedback && <p>{feedback.message}</p>}
     </div>
   )
 }
